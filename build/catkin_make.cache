@@ -1,0 +1,2 @@
+actionlib_tutorials
+-DCATKIN_DEVEL_PREFIX=/home/minji/ojt/devel -DCMAKE_INSTALL_PREFIX=/home/minji/ojt/install -G Unix Makefiles
