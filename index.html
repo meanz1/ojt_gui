@@ -27,22 +27,22 @@
             console.log("Connection to websocket server closed.");
         });
 
-        var fibonacciClient = new ROSLIB.ActionClient({
+        var actionNodeClient = new ROSLIB.ActionClient({
             ros: ros,
-            serverName: "/fibonacci",
-            actionName: "actionlib_tutorials/FibonacciAction",
+            serverName: "/ojtAction", //액션서버 이름
+            actionName: "robot_action/robot_action", //정해진 액션 파일 이름
         });
 
         var goal = new ROSLIB.Goal({
-            actionClient: fibonacciClient,
+            actionClient: actionNodeClient,
             goalMessage: {
-                order: 7,
+                order: "start",
             },
         });
 
         var nameTopic = new ROSLIB.Topic({
             ros: ros,
-            name: '/ojt',
+            name: '/pause',
             messageType: 'std_msgs/String'
         });
 
@@ -52,13 +52,13 @@
 
         goal.on("feedback", function (feedback) {
             console.log("Feedback: " + feedback.sequence);
-            document.getElementById("status_value").innerHTML = "WORKING"
+            
         });
 
         goal.on("result", function (result) {
             console.log("Final Result: " + result.sequence);
             document.getElementById("status_value").innerHTML = "FINISH";
-            document.getElementById("status_value").style.color = "green";
+            
         });
 
         function start() {
@@ -86,7 +86,7 @@
         <span id="btn_title">ACTION</span>
         <button id="start" onclick="start()">START</button>
         <span id="btn_title">TOPIC</span>
-        <button id="stop" onclick="stop()">STOP</button>
+        <button id="stop" onclick="stop()">pause</button>
     </div>
 
 </body>
